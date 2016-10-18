@@ -1,3 +1,3 @@
-require 'heroku-sinatra-app'
+require 'cloud-app'
 
 run Sinatra::Application
