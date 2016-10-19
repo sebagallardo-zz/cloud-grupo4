@@ -1,8 +1,10 @@
+<br>
+<a class="waves-effect waves-light btn red darken-4 modal-trigger" href="#modal1"><i class="material-icons left">add</i>Nuevo documento</a>
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Last Modified</th>
+      <th>Nombre</th>
+      <th>Ultima vez modificado</th>
       <th></th>
     </tr>
   </thead>
@@ -11,8 +13,30 @@
       <tr>
         <td><a href="<%= file.web_view_link %>"><%= file.name %></a></td>
         <td><%= file.modified_time %></td>
-        <td>#: <%= file.id %> </td>
+        <td><a href="/file/<%= file.id %>"> Detalles </a> </td>
       </tr>
   <% end %>
   </tbody>
 </table>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h5>Nuevo documento</h5>
+      <div class="row">
+        <form method="POST" action="/new">
+        <div class="input-field col s6">
+          <input name="doc" id="doc" type="text" class="validate">
+          <label for="doc">Nombre del documento</label>
+        </div>
+        <div class="input-field col s6">
+          <input name="email" id="email" type="email" class="validate">
+          <label for="email" data-error="Email invalido" data-success="right">Email del usuario a compartir</label>
+        </div>
+      <button class="btn waves-effect waves-light red darken-4 right" type="submit" name="action">Enviar
+        <i class="material-icons right">send</i>
+      </button>
+        </form>      
+      </div>
+    </div>
+  </div>

@@ -30,7 +30,7 @@ get '/sign' do
 	   "https://www.googleapis.com/auth/drive",
 	   "https://spreadsheets.google.com/feeds/",
 	 ],
-	 redirect_uri: "http://cloud-grupo4.herokuapp.com/signed")
+	 redirect_uri: "http://localhost:4567/signed")
 	auth_url = credentials.authorization_uri
 	redirect auth_url
 end
@@ -43,9 +43,28 @@ get '/signed' do
 	   "https://www.googleapis.com/auth/drive",
 	   "https://spreadsheets.google.com/feeds/",
 	 ],
-	 redirect_uri: "http://cloud-grupo4.herokuapp.com/signed")
+	 redirect_uri: "http://localhost:4567/signed")
 	credentials.code = params[:code]
 	credentials.fetch_access_token!
 	session[:user_session] = GoogleDrive::Session.from_credentials(credentials)
 	redirect url('/')
+end
+
+get '/file/:id' do
+	@file = session[:user_session].file_by_id(params[:id])
+	erb :file
+end
+
+get '/remove' do
+	id = params[:file]
+	@file = session[:user_session].file_by_id(id)
+	@file.acl.delete(@file.acl[params[:index].to_i])
+	redirect url("/file/#{id}")
+end
+
+post '/new' do
+	file = session[:user_session].upload_from_string(" ", params[:doc], :content_type => "text/plain")
+	file.acl.push(
+    {type: "user", email_address: params[:email], role: "writer"})
+    redirect url('/')
 end

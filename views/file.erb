@@ -1,0 +1,22 @@
+<h4 class="header center"><%= @file.title %></h1>
+
+<h5 class="header light">Usuarios que comparten el archivo</h5>
+
+<table class="highlight">
+	<thead>
+		<tr>
+			<th>Email</th>
+			<th>Rol</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @file.acl.each.with_index do |entry, index| %>
+		<tr>
+			<td><%= entry.email_address %></td>
+			<td><%= entry.role %></td>
+			<td><a href="/remove?file=<%= @file.id %>&index=<%= index %>">Remove</a></td>
+		</tr>
+		<% end %>		
+	</tbody>
+</table>
