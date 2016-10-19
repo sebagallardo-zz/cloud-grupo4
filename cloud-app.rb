@@ -30,7 +30,7 @@ get '/sign' do
 	   "https://www.googleapis.com/auth/drive",
 	   "https://spreadsheets.google.com/feeds/",
 	 ],
-	 redirect_uri: "http://localhost:4567/signed")
+	 redirect_uri: "http://cloud-grupo4.herokuapp.com/signed")
 	auth_url = credentials.authorization_uri
 	redirect auth_url
 end
@@ -43,7 +43,7 @@ get '/signed' do
 	   "https://www.googleapis.com/auth/drive",
 	   "https://spreadsheets.google.com/feeds/",
 	 ],
-	 redirect_uri: "http://localhost:4567/signed")
+	 redirect_uri: "http://cloud-grupo4.herokuapp.com/signed")
 	credentials.code = params[:code]
 	credentials.fetch_access_token!
 	session[:user_session] = GoogleDrive::Session.from_credentials(credentials)
