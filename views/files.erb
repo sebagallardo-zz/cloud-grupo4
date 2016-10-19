@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Last Modified</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @results.each do |file| %>
+      <tr>
+        <td><a href="<%= file.web_view_link %>"><%= file.name %></a></td>
+        <td><%= file.modified_time %></td>
+        <td>#: <%= file.id %> </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

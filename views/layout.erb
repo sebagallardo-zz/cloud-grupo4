@@ -8,13 +8,17 @@
     </head>
 
     <body>
-       <nav>
-        <div class="nav-wrapper red darken-4">
-          <a href="#" class="brand-logo center">DSSD - Grupo 4</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+      <nav class="red darken-4" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">DSSD - Grupo 4</a>
+          <% if session[:user_session] %>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="/logout">Logout</a></li>
           </ul>
+          <% end %>
         </div>
       </nav>
+
       <div class="container">
         <%= yield %>
       </div>
